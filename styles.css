@@ -151,6 +151,14 @@ tr.value td { background: rgba(46,194,107,.08); }
 .fixture .pc { text-align: center; font-size: 12px; color: var(--muted); }
 .fixture .mid { text-align: center; font-weight: 800; color: var(--muted); }
 
+/* 決勝トーナメント行 */
+.korow { display: grid; grid-template-columns: 92px 1fr 96px; gap: 10px; align-items: center; padding: 9px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg2); margin-bottom: 8px; }
+.korow .date { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.korow .pc { font-size: 11px; color: var(--muted); text-align: right; }
+.ko-slots { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.ko-slots .slot { font-weight: 700; font-size: 13px; background: var(--card2); border: 1px solid var(--line); border-radius: 8px; padding: 5px 9px; text-align: center; }
+.ko-vs { color: var(--muted); font-weight: 800; font-size: 11px; }
+
 .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin-top: 8px; }
 .legend span b { color: var(--txt); }
 
@@ -221,6 +229,14 @@ tr.value td { background: rgba(46,194,107,.08); }
   .fixture .tn:not(.r) { grid-area: tb; text-align: right; }
   .fixture .pc { grid-area: pc; text-align: left; opacity: .8; }
   .fixture .tn { font-size: 14px; }
+
+  /* 決勝トーナメント行: 縦積み */
+  .korow { grid-template-columns: 1fr; gap: 6px; }
+  .korow .date { display: flex; gap: 8px; align-items: baseline; white-space: normal; }
+  .korow .date br { display: none; }
+  .korow .pc { text-align: left; }
+  .ko-slots { justify-content: flex-start; }
+  .ko-slots .slot { font-size: 13px; }
 
   /* VS入替時の中央寄せ */
   .vs-mid { padding: 2px 0; }

@@ -310,6 +310,40 @@
     (D.groups || []).forEach(function (g) { var o = document.createElement('option'); o.value = g.group; o.textContent = 'グループ ' + g.group; sel.appendChild(o); });
     sel.addEventListener('change', drawSchedule);
     drawSchedule();
+    renderKnockout();
+  }
+
+  /* ---------- 決勝トーナメント（ブラケット） ---------- */
+  var KO_ROUND_JA = { 'R32': 'ベスト32（ラウンド32）', 'R16': 'ベスト16', 'QF': '準々決勝', 'SF': '準決勝', '3rd': '3位決定戦', 'Final': '決勝' };
+  function fmtSlot(s) {
+    s = String(s || '').trim();
+    var m1 = s.match(/^([123])([A-L])$/i);                 // 1A → グループA 1位
+    if (m1) return 'グループ' + m1[2].toUpperCase() + ' ' + m1[1] + '位';
+    var t = s.match(/^3\s*\(([^)]+)\)$/);                    // 3(C/E/F) → 3位[C/E/F]
+    if (t) return '3位 [' + t[1] + ']';
+    var w = s.match(/^W\s*(\d+)$/i);                         // W73 → 第73試合 勝者
+    if (w) return '第' + w[1] + '試合 勝者';
+    var l = s.match(/^L\s*(\d+)$/i);                         // L101 → 第101試合 敗者
+    if (l) return '第' + l[1] + '試合 敗者';
+    return s || '?';
+  }
+  function renderKnockout() {
+    var ko = D.knockout || [];
+    if (!ko.length) { $('koCard').style.display = 'none'; return; }
+    $('koCard').style.display = 'block';
+    var html = '';
+    ko.forEach(function (rd) {
+      html += '<h3 style="color:var(--txt);margin:18px 0 8px">' + (KO_ROUND_JA[rd.round] || rd.round) + '</h3>';
+      rd.matches.slice().sort(function (a, b) { return kickoffInstant(a) - kickoffInstant(b); }).forEach(function (m) {
+        var j = toJST(m);
+        html += '<div class="korow">';
+        html += '<div class="date">' + (j.md ? j.md + '(' + j.wd + ')' : '—') + '<br><b style="color:var(--txt)">' + (j.time || '') + '</b> <span style="font-size:10px">JST</span></div>';
+        html += '<div class="ko-slots"><span class="slot">' + fmtSlot(m.slotA) + '</span><span class="ko-vs">vs</span><span class="slot">' + fmtSlot(m.slotB) + '</span></div>';
+        html += '<div class="pc">' + (m.matchNo ? '第' + m.matchNo + '試合<br>' : '') + (m.city || '') + '</div>';
+        html += '</div>';
+      });
+    });
+    $('koBox').innerHTML = html;
   }
   function drawSchedule() {
     var box = $('scheduleBox');

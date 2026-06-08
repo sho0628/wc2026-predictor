@@ -84,6 +84,56 @@ window.WC_DATA = {
     }
   ],
 
+  // 決勝トーナメント（公式ブラケット。Wikipedia/FIFA/NBCで一致確認済。番号73-104）。
+  // slot: "1A"(A組1位) "2B"(B組2位) "3(C/E/..)"(3位枠の候補) "W73"(第73試合勝者) "L101"(敗者)。
+  // 開始時刻は現地・暫定（timeLocal）。表示はJSTに変換。
+  knockout: [
+    { round: 'R32', matches: [
+      { matchNo: 73, date: '2026-06-28', timeLocal: '12:00', city: 'Inglewood', venue: 'SoFi Stadium', slotA: '2A', slotB: '2B' },
+      { matchNo: 74, date: '2026-06-29', timeLocal: '16:30', city: 'Foxborough', venue: 'Gillette Stadium', slotA: '1E', slotB: '3(A/B/C/D/F)' },
+      { matchNo: 75, date: '2026-06-29', timeLocal: '19:00', city: 'Guadalupe, Nuevo Leon', venue: 'Estadio BBVA', slotA: '1F', slotB: '2C' },
+      { matchNo: 76, date: '2026-06-29', timeLocal: '12:00', city: 'Houston', venue: 'NRG Stadium', slotA: '1C', slotB: '2F' },
+      { matchNo: 77, date: '2026-06-30', timeLocal: '17:00', city: 'East Rutherford', venue: 'MetLife Stadium', slotA: '1I', slotB: '3(C/D/F/G/H)' },
+      { matchNo: 78, date: '2026-06-30', timeLocal: '12:00', city: 'Arlington', venue: 'AT&T Stadium', slotA: '2E', slotB: '2I' },
+      { matchNo: 79, date: '2026-06-30', timeLocal: '19:00', city: 'Mexico City', venue: 'Estadio Azteca', slotA: '1A', slotB: '3(C/E/F/H/I)' },
+      { matchNo: 80, date: '2026-07-01', timeLocal: '12:00', city: 'Atlanta', venue: 'Mercedes-Benz Stadium', slotA: '1L', slotB: '3(E/H/I/J/K)' },
+      { matchNo: 81, date: '2026-07-01', timeLocal: '17:00', city: 'Santa Clara', venue: "Levi's Stadium", slotA: '1D', slotB: '3(B/E/F/I/J)' },
+      { matchNo: 82, date: '2026-07-01', timeLocal: '13:00', city: 'Seattle', venue: 'Lumen Field', slotA: '1G', slotB: '3(A/E/H/I/J)' },
+      { matchNo: 83, date: '2026-07-02', timeLocal: '19:00', city: 'Toronto', venue: 'BMO Field', slotA: '2K', slotB: '2L' },
+      { matchNo: 84, date: '2026-07-02', timeLocal: '12:00', city: 'Inglewood', venue: 'SoFi Stadium', slotA: '1H', slotB: '2J' },
+      { matchNo: 85, date: '2026-07-02', timeLocal: '20:00', city: 'Vancouver', venue: 'BC Place', slotA: '1B', slotB: '3(E/F/G/I/J)' },
+      { matchNo: 86, date: '2026-07-03', timeLocal: '18:00', city: 'Miami Gardens', venue: 'Hard Rock Stadium', slotA: '1J', slotB: '2H' },
+      { matchNo: 87, date: '2026-07-03', timeLocal: '20:30', city: 'Kansas City', venue: 'Arrowhead Stadium', slotA: '1K', slotB: '3(D/E/I/J/L)' },
+      { matchNo: 88, date: '2026-07-03', timeLocal: '13:00', city: 'Arlington', venue: 'AT&T Stadium', slotA: '2D', slotB: '2G' }
+    ]},
+    { round: 'R16', matches: [
+      { matchNo: 89, date: '2026-07-04', timeLocal: '17:00', city: 'Philadelphia', venue: 'Lincoln Financial Field', slotA: 'W74', slotB: 'W77' },
+      { matchNo: 90, date: '2026-07-04', timeLocal: '12:00', city: 'Houston', venue: 'NRG Stadium', slotA: 'W73', slotB: 'W75' },
+      { matchNo: 91, date: '2026-07-05', timeLocal: '16:00', city: 'East Rutherford', venue: 'MetLife Stadium', slotA: 'W76', slotB: 'W78' },
+      { matchNo: 92, date: '2026-07-05', timeLocal: '18:00', city: 'Mexico City', venue: 'Estadio Azteca', slotA: 'W79', slotB: 'W80' },
+      { matchNo: 93, date: '2026-07-06', timeLocal: '14:00', city: 'Arlington', venue: 'AT&T Stadium', slotA: 'W83', slotB: 'W84' },
+      { matchNo: 94, date: '2026-07-06', timeLocal: '17:00', city: 'Seattle', venue: 'Lumen Field', slotA: 'W81', slotB: 'W82' },
+      { matchNo: 95, date: '2026-07-07', timeLocal: '12:00', city: 'Atlanta', venue: 'Mercedes-Benz Stadium', slotA: 'W86', slotB: 'W88' },
+      { matchNo: 96, date: '2026-07-07', timeLocal: '13:00', city: 'Vancouver', venue: 'BC Place', slotA: 'W85', slotB: 'W87' }
+    ]},
+    { round: 'QF', matches: [
+      { matchNo: 97, date: '2026-07-09', timeLocal: '16:00', city: 'Foxborough', venue: 'Gillette Stadium', slotA: 'W89', slotB: 'W90' },
+      { matchNo: 98, date: '2026-07-10', timeLocal: '12:00', city: 'Inglewood', venue: 'SoFi Stadium', slotA: 'W93', slotB: 'W94' },
+      { matchNo: 99, date: '2026-07-11', timeLocal: '17:00', city: 'Miami Gardens', venue: 'Hard Rock Stadium', slotA: 'W91', slotB: 'W92' },
+      { matchNo: 100, date: '2026-07-11', timeLocal: '20:00', city: 'Kansas City', venue: 'Arrowhead Stadium', slotA: 'W95', slotB: 'W96' }
+    ]},
+    { round: 'SF', matches: [
+      { matchNo: 101, date: '2026-07-14', timeLocal: '14:00', city: 'Arlington', venue: 'AT&T Stadium', slotA: 'W97', slotB: 'W98' },
+      { matchNo: 102, date: '2026-07-15', timeLocal: '15:00', city: 'Atlanta', venue: 'Mercedes-Benz Stadium', slotA: 'W99', slotB: 'W100' }
+    ]},
+    { round: '3rd', matches: [
+      { matchNo: 103, date: '2026-07-18', timeLocal: '17:00', city: 'Miami Gardens', venue: 'Hard Rock Stadium', slotA: 'L101', slotB: 'L102' }
+    ]},
+    { round: 'Final', matches: [
+      { matchNo: 104, date: '2026-07-19', timeLocal: '15:00', city: 'East Rutherford', venue: 'MetLife Stadium', slotA: 'W101', slotB: 'W102' }
+    ]}
+  ],
+
   teams: {
     // --- ポット級・優勝候補 ---
     'Spain':                  { code: 'es', elo: 2155, fifa: 1876.4,  fifaRank: 2,  form: 84, star: 'Yamal, Pedri, Rodri', inj: 'Yamalハム(開幕戦は微妙)' },
