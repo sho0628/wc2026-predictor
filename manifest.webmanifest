@@ -1,0 +1,17 @@
+{
+  "name": "WINNER Predictor — W杯2026予測",
+  "short_name": "WINNER予測",
+  "description": "FIFA World Cup 2026 の試合をEloとDixon-Colesで予測。WINNER 18択・toto・優勝予想の期待値を算出。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "lang": "ja",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
