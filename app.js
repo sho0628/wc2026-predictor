@@ -92,7 +92,10 @@
     if (ctx.b.altitudeUnfamiliar) bits.push(b + ' 高地不利(-)');
     return bits.length ? '自動補正: ' + bits.join(' / ') : '';
   }
-  function currentWeights() { return { form: parseFloat($('formW').value), host: 70, altitude: 25, heat: 15 }; }
+  function currentWeights() {
+    var injEl = $('injW');
+    return { form: parseFloat($('formW').value), inj: injEl ? parseFloat(injEl.value) : 1.0, host: 70, altitude: 25, heat: 15 };
+  }
 
   /* ---------- 予測実行 ---------- */
   var lastPrediction = null;
@@ -703,7 +706,8 @@
     var html = '<tr><th>#</th><th>チーム</th><th class="num">Elo</th><th class="num">FIFA</th><th class="num">調子</th><th>組</th><th>主力 / 負傷</th></tr>';
     rows.forEach(function (t, i) {
       var grp = (D.groups || []).find(function (g) { return g.teams.indexOf(t.name) >= 0; });
-      var info = (t.star ? t.star : '') + (t.inj ? ' ／ <span style="color:var(--amber)">' + t.inj + '</span>' : '');
+      var info = (t.star ? t.star : '') + (t.inj ? ' ／ <span style="color:var(--amber)">' + t.inj + '</span>' : '') +
+        (t.injPenalty > 0 ? ' <span style="color:var(--red);font-weight:700">−' + t.injPenalty + '</span>' : '');
       html += '<tr><td class="num">' + (i + 1) + '</td>';
       html += '<td>' + flag(t.name) + ' ' + t.name + '</td>';
       html += '<td class="num">' + (t.elo ? Math.round(t.elo) : '—') + '</td>';
@@ -738,6 +742,8 @@
     $('swapBtn').addEventListener('click', function () { var a = $('teamA').value; $('teamA').value = $('teamB').value; $('teamB').value = a; runPredict(); });
     $('venuePreset').addEventListener('change', runPredict);
     $('formW').addEventListener('input', function () { $('formWLbl').textContent = $('formW').value; });
+    $('injW').addEventListener('input', function () { $('injWLbl').textContent = parseFloat($('injW').value).toFixed(1); });
+    ['formW', 'injW', 'totalW'].forEach(function (id) { $(id).addEventListener('change', runPredict); });
     $('totalW').addEventListener('input', function () { $('totalLbl').textContent = parseFloat($('totalW').value).toFixed(1); });
     $('fillFairBtn').addEventListener('click', function () {
       if (!lastWinnerOpts) return;

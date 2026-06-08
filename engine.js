@@ -171,6 +171,12 @@
       elo += ((team.form - 50) / 50) * wForm;
     }
 
+    // 負傷補正: 主力欠場ぶんを実効Eloから明示的に減点（injPenalty=Elo点, wInj=反映度）
+    var wInj = weights.inj != null ? weights.inj : 1.0;
+    if (typeof team.injPenalty === 'number') {
+      elo -= team.injPenalty * wInj;
+    }
+
     // FIFAランク補正: FIFAポイントとEloの整合を弱く取り込む（任意）
     var wFifa = weights.fifa != null ? weights.fifa : 0;      // 既定は0（Elo優先）
     if (wFifa && typeof team.fifa === 'number' && weights.fifaMean) {
