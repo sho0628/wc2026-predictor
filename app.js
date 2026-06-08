@@ -311,6 +311,25 @@
     sel.addEventListener('change', drawSchedule);
     drawSchedule();
     renderKnockout();
+    initSchedToggle();
+  }
+  function initSchedToggle() {
+    var hasKO = (D.knockout || []).length > 0;
+    var tog = $('schedToggle');
+    if (!tog) return;
+    if (!hasKO) { tog.style.display = 'none'; return; }
+    function show(sec) {
+      var ko = sec === 'ko';
+      $('groupsCard').style.display = ko ? 'none' : '';
+      $('schedCard').style.display = ko ? 'none' : '';
+      $('koCard').style.display = ko ? 'block' : 'none';
+      tog.querySelectorAll('button').forEach(function (b) { b.classList.toggle('active', b.dataset.sec === sec); });
+      window.scrollTo(0, 0);
+    }
+    tog.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function () { show(b.dataset.sec); });
+    });
+    show('group'); // 既定はグループステージ
   }
 
   /* ---------- 決勝トーナメント（ブラケット） ---------- */

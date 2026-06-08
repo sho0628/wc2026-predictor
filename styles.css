@@ -163,6 +163,11 @@ tr.value td { background: rgba(46,194,107,.08); }
 .korow.clickable { cursor: pointer; }
 .korow.clickable:hover { border-color: var(--accent); }
 
+/* 日程ページの切替（グループ/決勝T） */
+.seg-toggle { display: inline-flex; gap: 4px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 4px; }
+.seg-toggle button { background: transparent; color: var(--muted); border: none; padding: 9px 18px; border-radius: 999px; cursor: pointer; font-weight: 700; font-size: 14px; }
+.seg-toggle button.active { background: linear-gradient(90deg, var(--accent), var(--accent2)); color: #fff; }
+
 .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin-top: 8px; }
 .legend span b { color: var(--txt); }
 
@@ -241,6 +246,8 @@ tr.value td { background: rgba(46,194,107,.08); }
   .korow .pc { text-align: left; }
   .ko-slots { justify-content: flex-start; }
   .ko-slots .slot { font-size: 13px; }
+  .seg-toggle { display: flex; width: 100%; }
+  .seg-toggle button { flex: 1; padding: 9px 10px; font-size: 13px; }
 
   /* VS入替時の中央寄せ */
   .vs-mid { padding: 2px 0; }

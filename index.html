@@ -161,8 +161,12 @@
   <!-- ============ 日程・組 ============ -->
   <section class="view" id="view-schedule">
     <div class="hero"><h1>日程・組分け</h1><p>試合をクリックで予測タブに読み込みます（会場の高地・開催国補正は自動適用）。時刻は<b>日本時間(JST)</b>表示、小さい数字が現地時刻。日程順に並びます。</p></div>
-    <div class="card"><h2>グループ（全12組）</h2><div id="groupsBox"></div></div>
-    <div class="card" style="margin-top:16px"><h2>試合日程（グループステージ72試合）</h2>
+    <div class="seg-toggle" id="schedToggle">
+      <button data-sec="group" class="active">グループステージ</button>
+      <button data-sec="ko">決勝トーナメント</button>
+    </div>
+    <div id="groupsCard" class="card" style="margin-top:14px"><h2>グループ（全12組）</h2><div id="groupsBox"></div></div>
+    <div id="schedCard" class="card" style="margin-top:16px"><h2>試合日程（グループステージ72試合）</h2>
       <label class="fld">グループで絞り込み</label>
       <select id="schedFilter"><option value="">すべて</option></select>
       <div id="scheduleBox" style="margin-top:12px"></div>
