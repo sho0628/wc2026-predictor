@@ -1,0 +1,5 @@
+# ローカル/プレビュー用（公開不要）
+.claude/
+*.log
+.DS_Store
+Thumbs.db

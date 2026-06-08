@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WINNER Predictor — FIFA World Cup 2026 試合予測</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="logo"><span class="ball">⚽</span><span class="pill">WINNER Predictor</span></div>
+    <div class="sub" id="metaSub">FIFA World Cup 2026</div>
+    <nav class="tabs" id="tabs">
+      <button data-view="predict" class="active">試合予測</button>
+      <button data-view="toto">toto予想</button>
+      <button data-view="schedule">日程・組</button>
+      <button data-view="groupsim">順位予測</button>
+      <button data-view="champion">優勝予想</button>
+      <button data-view="ratings">レーティング</button>
+      <button data-view="about">使い方・方法</button>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ 予測 ============ -->
+  <section class="view active" id="view-predict">
+    <div class="hero">
+      <h1>試合予測 &amp; WINNER 18択 期待値</h1>
+      <p>2チームを選ぶと、Eloレーティング＋直近フォーム＋会場補正からスコア分布を算出。WINNER「1試合予想」の<b>18択それぞれの的中確率・フェア倍率</b>を出し、払戻倍率を入れると<b>期待値（買い目）</b>を判定します。</p>
+    </div>
+
+    <div class="card">
+      <div class="vs-row">
+        <div>
+          <label class="fld">第1チーム（WINNER表記の左／ホーム扱い）</label>
+          <select id="teamA"></select>
+        </div>
+        <div class="vs-mid">VS</div>
+        <div>
+          <label class="fld">第2チーム（右／アウェイ扱い）</label>
+          <select id="teamB"></select>
+        </div>
+      </div>
+      <div class="grid cols3" style="margin-top:12px">
+        <div>
+          <label class="fld">会場補正</label>
+          <select id="venuePreset">
+            <option value="neutral">中立地</option>
+            <option value="hostA">第1チームが開催国ホーム</option>
+            <option value="hostB">第2チームが開催国ホーム</option>
+            <option value="altA">第1チームが高地不慣れ</option>
+            <option value="altB">第2チームが高地不慣れ</option>
+          </select>
+          <div class="note" id="autoCtxNote" style="margin-top:4px"></div>
+        </div>
+        <div>
+          <label class="fld">フォーム反映度: <span id="formWLbl">40</span></label>
+          <input type="range" id="formW" min="0" max="80" value="40" style="width:100%" />
+        </div>
+        <div>
+          <label class="fld">平均総得点（大会基準）: <span id="totalLbl">2.6</span></label>
+          <input type="range" id="totalW" min="2.0" max="3.4" step="0.1" value="2.6" style="width:100%" />
+        </div>
+      </div>
+      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+        <button class="btn" id="predictBtn">予測する</button>
+        <button class="btn ghost" id="swapBtn">⇄ 入れ替え</button>
+      </div>
+    </div>
+
+    <div id="result" style="margin-top:16px"></div>
+
+    <div class="card" id="winnerCard" style="margin-top:16px; display:none">
+      <h2>WINNER 18択 — 的中確率・フェア倍率・期待値</h2>
+      <p class="note">各選択肢の「モデル的中確率」と、それに対する公正な倍率（=1÷確率）を表示します。WINNERは<b>パリミュチュエル（変動オッズ）</b>なので、購入画面の<b>払戻倍率</b>を入力すると期待値（EV）を計算し、<b>払戻倍率がフェア倍率を上回る＝買い目</b>を緑で示します。<br>※18択の正確な内訳は購入時にWINNER商品ページでご確認ください。</p>
+      <div style="margin:10px 0; display:flex; gap:10px; flex-wrap:wrap; align-items:center">
+        <button class="btn ghost" id="fillFairBtn">フェア倍率を一括入力</button>
+        <button class="btn ghost" id="clearOddsBtn">倍率クリア</button>
+        <span class="note">（倍率は入れたものだけEV計算します）</span>
+      </div>
+      <div style="overflow:auto"><table id="winnerTable"></table></div>
+      <div id="winnerSummary" style="margin-top:12px"></div>
+    </div>
+
+    <div class="card" id="evCard" style="margin-top:16px; display:none">
+      <h2>参考: 勝/分/負（1X2）の期待値</h2>
+      <p class="note">toto・mini totoや他社の1X2オッズ向けの参考。WINNER 1試合予想はスコア18択です。</p>
+      <div class="grid cols3" style="margin-top:8px">
+        <div><label class="fld" id="oddsHomeLbl">第1チーム 勝ち</label><input type="number" step="0.01" id="oddsHome" placeholder="例 2.10" /></div>
+        <div><label class="fld">引き分け</label><input type="number" step="0.01" id="oddsDraw" placeholder="例 3.40" /></div>
+        <div><label class="fld" id="oddsAwayLbl">第2チーム 勝ち</label><input type="number" step="0.01" id="oddsAway" placeholder="例 3.80" /></div>
+      </div>
+      <div style="margin-top:12px"><button class="btn" id="evBtn">期待値を計算</button></div>
+      <div id="evResult" style="margin-top:14px"></div>
+    </div>
+  </section>
+
+  <!-- ============ toto予想 ============ -->
+  <section class="view" id="view-toto">
+    <div class="hero">
+      <h1>toto / mini toto 予想（1X2）</h1>
+      <p>totoは複数試合の<b>勝(1)／分(0)／負(2)</b>（ホーム視点・90分の結果）を当てる方式。<b>予算（最大組合せ数）内で、拮抗試合だけ自動でダブル/トリプルに広げて全的中確率を最大化</b>します。</p>
+      <p class="note">2026 W杯は<b>グループステージ対象でtoto(13試合)・mini toto(5試合)・totoGOAL3</b>が販売（WINNERとは別系統・¥100/口・パリミュチュエル）。<b>第1634〜1637回の実際の指定試合を収録済み</b>——上の「指定試合カードを読み込む」から選ぶと、その対象試合を実際の並び（ホーム=印1）で予測します。締切はJST。totoGOAL3はこのページ下部に表示。</p>
+    </div>
+    <div class="card">
+      <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end">
+        <div style="min-width:240px">
+          <label class="fld">指定試合カードを読み込む（JSC実際の対象試合）</label>
+          <select id="totoCardSel"></select>
+        </div>
+        <div>
+          <label class="fld">または自動作成</label>
+          <div style="display:flex; gap:6px">
+            <button class="btn ghost" id="totoMini">mini toto（直近5）</button>
+            <button class="btn ghost" id="totoFull">toto（直近13）</button>
+          </div>
+        </div>
+        <div>
+          <label class="fld">予算: 最大組合せ数（×¥100）</label>
+          <input type="number" id="totoBudget" value="16" min="1" step="1" style="width:120px" />
+        </div>
+        <button class="btn" id="totoOpt">予算内で最適化</button>
+        <button class="btn ghost" id="totoClear">クリア</button>
+      </div>
+      <div style="margin-top:10px; max-width:420px">
+        <label class="fld">カードに試合を追加</label>
+        <select id="totoAddSel"></select>
+      </div>
+      <div id="totoCardInfo" class="note" style="margin-top:10px"></div>
+      <div id="totoSummary" style="margin-top:12px"></div>
+      <div class="legend"><span><b>1</b>=ホーム勝ち</span><span><b>0</b>=引き分け</span><span><b>2</b>=アウェイ勝ち</span><span>★=モデル推奨マーク</span></div>
+      <div style="overflow:auto; margin-top:8px; border:1px solid var(--line); border-radius:12px">
+        <table id="totoTable"></table>
+      </div>
+      <div class="note" id="totoNote" style="margin-top:10px"></div>
+    </div>
+
+    <div class="card" id="goal3Card" style="margin-top:16px">
+      <h2>totoGOAL3 予想（各チームの得点数 0 / 1 / 2 / 3+）</h2>
+      <p class="note">3試合6チームの90分得点数を当てる商品。★がモデル推奨バケットです。</p>
+      <label class="fld">対象回</label>
+      <select id="goal3Sel" style="max-width:280px"></select>
+      <div id="goal3Box" style="margin-top:12px"></div>
+    </div>
+  </section>
+
+  <!-- ============ 日程・組 ============ -->
+  <section class="view" id="view-schedule">
+    <div class="hero"><h1>日程・組分け</h1><p>試合をクリックで予測タブに読み込みます（会場の高地・開催国補正は自動適用）。時刻は<b>日本時間(JST)</b>表示、小さい数字が現地時刻。日程順に並びます。</p></div>
+    <div class="card"><h2>グループ（全12組）</h2><div id="groupsBox"></div></div>
+    <div class="card" style="margin-top:16px"><h2>試合日程（グループステージ72試合）</h2>
+      <label class="fld">グループで絞り込み</label>
+      <select id="schedFilter"><option value="">すべて</option></select>
+      <div id="scheduleBox" style="margin-top:12px"></div>
+    </div>
+  </section>
+
+  <!-- ============ 順位予測 ============ -->
+  <section class="view" id="view-groupsim">
+    <div class="hero"><h1>グループ順位シミュレーション</h1><p>各組の総当たりを1万回モンテカルロし、組1位・突破（上位2）・3位確率を推定します。</p></div>
+    <div class="card">
+      <label class="fld">グループ選択</label>
+      <select id="simGroup"></select>
+      <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+        <button class="btn" id="simBtn">シミュレーション実行</button>
+        <button class="btn ghost" id="simAllBtn">全12組まとめて</button>
+      </div>
+      <div id="simResult" style="margin-top:14px"></div>
+    </div>
+  </section>
+
+  <!-- ============ 優勝予想 ============ -->
+  <section class="view" id="view-champion">
+    <div class="hero"><h1>優勝予想（トーナメント・シミュレーション）</h1>
+      <p>グループ→決勝トーナメント（32チーム）を多数回シミュレートし、各国の優勝・決勝進出・ベスト4到達確率を推定します。WINNER「競技会予想（優勝予想）」の参考に。</p></div>
+    <div class="card">
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center">
+        <label class="fld" style="margin:0">試行回数</label>
+        <select id="champSims" style="width:auto">
+          <option value="2000">2,000回（速い）</option>
+          <option value="5000" selected>5,000回（標準）</option>
+          <option value="10000">10,000回（高精度・やや重い）</option>
+        </select>
+        <button class="btn" id="champBtn">優勝予想を計算</button>
+      </div>
+      <div class="note" style="margin-top:8px">※決勝トーナメントの対戦表割当は簡略化（ランダム抽選した固定ブラケット）した近似値です。優勝候補の序列・目安としてご利用ください。</div>
+      <div id="champResult" style="margin-top:14px"></div>
+    </div>
+  </section>
+
+  <!-- ============ レーティング ============ -->
+  <section class="view" id="view-ratings">
+    <div class="hero"><h1>チームレーティング</h1><p>Elo（予測の主軸）・FIFAランク・直近フォーム・主力/負傷の一覧。</p></div>
+    <div class="card">
+      <label class="fld">検索</label>
+      <input type="text" id="ratingSearch" placeholder="チーム名で検索（英語）" />
+      <div style="overflow:auto; margin-top:12px"><table id="ratingsTable"></table></div>
+    </div>
+  </section>
+
+  <!-- ============ 使い方・方法 ============ -->
+  <section class="view" id="view-about">
+    <div class="hero"><h1>使い方・予測の仕組み</h1></div>
+
+    <div class="card">
+      <h2>0. WINNER（楽天toto）の正しい仕様 — まずここが重要</h2>
+      <p>WINNERの「<b>1試合予想</b>」は、勝/分/負（1X2）ではなく<b>スコア予想</b>です。勝つチームとスコアを<b>18択</b>（例: 1-0, 2-0, 2-2, その他の引き分け…）から選びます。さらに以下の特徴があります。</p>
+      <ul class="note">
+        <li><b>パリミュチュエル（変動オッズ）</b>：払戻倍率は投票プールで決まり、販売締切まで確定しません。固定オッズではありません。</li>
+        <li><b>払戻金 = 購入金額 × 確定払戻倍率</b>。売上の約50%が当せん金原資。1口 ¥200、1選択肢につき最大99口、最高払戻 5億円。</li>
+        <li><b>1ベット＝1試合</b>。複数試合のオッズ掛け合わせ（アキュムレータ）はありません。カートで複数試合を個別に買うことは可能。</li>
+        <li>別商品として<b>競技会予想（優勝予想）</b>＝優勝国を当てる、もあります。</li>
+        <li>2026 W杯は<b>全104試合</b>が1試合予想の対象（2026-05-22発売開始）。</li>
+      </ul>
+      <h2>0.5. toto / mini toto / totoGOAL3（WINNERとは別系統）</h2>
+      <p>「勝/分/負」を当てるのは <b>toto系</b>。2026 W杯は<b>グループステージ対象</b>で販売されます（JSC公式 2026-05-22 発表）。</p>
+      <ul class="note">
+        <li><b>toto</b>: 指定<b>13試合</b>の結果を予想。マークは<b>ホーム視点で 1=勝 / 0=分(延長・PKは0扱い) / 2=負</b>。全13的中で1等（理論 1/1,594,323）。2等(12)・3等(11)あり、キャリーオーバーあり、最高5億円。</li>
+        <li><b>mini toto（A/B）</b>: 各<b>5試合</b>。全5的中の1等のみ（理論 1/243）。キャリーオーバーなし。</li>
+        <li><b>totoGOAL3</b>: <b>3試合6チーム</b>の各得点数（0/1/2/3+）を予想（理論 1/4,096）。→「試合予測」タブに各チームの得点数確率を表示。</li>
+        <li>いずれも<b>¥100/口・パリミュチュエル</b>。シングル/ダブル/トリプルで複数印が打て、<b>組合せ数＝各試合の印数の積</b>（×¥100）。<b>判定は90分</b>のみ。<b>指定試合はJSCが固定</b>（購入者は選べない）。</li>
+      </ul>
+      <p class="note">本アプリの「toto予想」タブで、任意の試合からカードを作り予算内最適化できます。実購入時は楽天toto等の指定試合に合わせてください（W杯toto回・指定試合・締切は各販売サイトで要確認）。</p>
+
+      <h2>1. 予測モデル</h2>
+      <p><b>World Football Elo</b>を強度の主軸に、<b>直近フォーム</b>・<b>会場（開催国ホーム/高地/酷暑）</b>を補正して各チームの「実効Elo」を作ります。Elo差を勝点期待値 <code>We = 1/(1+10^(-差/400))</code> に変換し、<b>Dixon-Coles補正付きポアソン</b>でスコア確率行列を構築。そこから18択・勝分負・的中スコア・Over/Under・両者得点(BTTS)を一貫した確率分布として導きます。引き分けや僅差での荒れも自然に表現されます。</p>
+
+      <h2>2. WINNERでの使い方（期待値ベッティング）</h2>
+      <p>当たりやすい予想を選ぶだけでは長期回収率は上がりません。鍵は<b>「モデル的中確率 × 払戻倍率 &gt; 1」＝期待値プラスの買い目</b>を選ぶこと。本アプリは18択ごとに的中確率と<b>フェア倍率（=1÷確率）</b>を表示します。購入画面の払戻倍率がフェア倍率を上回っていれば、その選択肢は理論上「買い」です。</p>
+      <ul class="note">
+        <li>WINNERは変動オッズなので、表示倍率は締切まで動きます。締切間際の倍率で判断するのが理想。</li>
+        <li>人気のない（皆が買わない）選択肢ほど倍率が高くなりやすく、モデルが過小評価されていれば妙味が出ます。</li>
+        <li>資金管理はフラクショナル・ケリー（1/4程度）を推奨。分散が大きいので無理は禁物。</li>
+      </ul>
+
+      <h2>3. 注意</h2>
+      <div class="disclaimer" id="disclaimerBox">
+        ⚠️ <b>予測は確率であり、的中を保証するものではありません。</b>サッカーは番狂わせの多い競技です。本アプリは情報提供・分析支援を目的としたもので、ベットの結果について一切責任を負いません。余裕資金の範囲で、自己責任のうえお楽しみください。<b>くじの購入は19歳以上</b>です。
+      </div>
+
+      <h2>4. データ出典</h2>
+      <div id="sourcesBox" class="note"></div>
+    </div>
+  </section>
+
+  <div class="foot" id="foot"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
