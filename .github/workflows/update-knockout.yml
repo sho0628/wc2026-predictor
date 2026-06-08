@@ -1,0 +1,42 @@
+name: Update knockout matchups
+
+# 大会期間中、Wikipedia公式ブラケットから確定した決勝T対戦を取得し ko-results.js を自動更新。
+# 手動実行も可能（Actions タブ → Run workflow）。
+
+on:
+  schedule:
+    - cron: '0 */3 * * *'   # 3時間ごと（UTC）
+  workflow_dispatch:        # 手動トリガー
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-knockout
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch & build ko-results.js
+        run: node scripts/update-ko.mjs
+
+      - name: Commit if changed
+        run: |
+          if [ -n "$(git status --porcelain ko-results.js)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add ko-results.js
+            git commit -m "Auto-update knockout matchups [skip ci]"
+            git push
+            echo "ko-results.js updated and pushed."
+          else
+            echo "No change in ko-results.js."
+          fi

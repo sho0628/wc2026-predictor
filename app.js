@@ -327,23 +327,58 @@
     if (l) return '第' + l[1] + '試合 敗者';
     return s || '?';
   }
+  function koSlotHtml(resolvedName, slotStr) {
+    if (resolvedName && D.teams[resolvedName]) {
+      return '<span class="slot res">' + flag(resolvedName) + '<b>' + resolvedName + '</b>' +
+        '<span class="sub">' + fmtSlot(slotStr) + '</span></span>';
+    }
+    return '<span class="slot">' + fmtSlot(slotStr) + '</span>';
+  }
   function renderKnockout() {
     var ko = D.knockout || [];
     if (!ko.length) { $('koCard').style.display = 'none'; return; }
     $('koCard').style.display = 'block';
+    var R = window.KO_RESULTS || {};
+    var resolvedCount = 0;
     var html = '';
     ko.forEach(function (rd) {
       html += '<h3 style="color:var(--txt);margin:18px 0 8px">' + (KO_ROUND_JA[rd.round] || rd.round) + '</h3>';
       rd.matches.slice().sort(function (a, b) { return kickoffInstant(a) - kickoffInstant(b); }).forEach(function (m) {
         var j = toJST(m);
-        html += '<div class="korow">';
+        var r = R[m.matchNo] || R['' + m.matchNo] || {};
+        var aName = (r.teamA && D.teams[r.teamA]) ? r.teamA : null;
+        var bName = (r.teamB && D.teams[r.teamB]) ? r.teamB : null;
+        var both = aName && bName;
+        if (aName) resolvedCount++; if (bName) resolvedCount++;
+        html += '<div class="korow' + (both ? ' clickable' : '') + '"' + (both ? ' data-a="' + aName + '" data-b="' + bName + '" data-city="' + (m.city || '') + '"' : '') + '>';
         html += '<div class="date">' + (j.md ? j.md + '(' + j.wd + ')' : '—') + '<br><b style="color:var(--txt)">' + (j.time || '') + '</b> <span style="font-size:10px">JST</span></div>';
-        html += '<div class="ko-slots"><span class="slot">' + fmtSlot(m.slotA) + '</span><span class="ko-vs">vs</span><span class="slot">' + fmtSlot(m.slotB) + '</span></div>';
+        html += '<div class="ko-slots">' + koSlotHtml(aName, m.slotA) + '<span class="ko-vs">vs</span>' + koSlotHtml(bName, m.slotB) + '</div>';
         html += '<div class="pc">' + (m.matchNo ? '第' + m.matchNo + '試合<br>' : '') + (m.city || '') + '</div>';
         html += '</div>';
       });
     });
     $('koBox').innerHTML = html;
+    // 両国確定の試合は予測タブへ
+    $('koBox').querySelectorAll('.korow.clickable').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var a = el.dataset.a, b = el.dataset.b;
+        if (D.teams[a] && D.teams[b]) {
+          $('teamA').value = a; $('teamB').value = b;
+          autoCtx = autoContextFromMatch({ teamA: a, teamB: b, city: el.dataset.city });
+          $('venuePreset').value = 'auto';
+          gotoView('predict'); runPredict();
+        }
+      });
+    });
+    // 確定状況のひとことを koCard 見出し下に
+    var info = $('koInfo');
+    if (info) {
+      if (window.KO_RESULTS_UPDATED && resolvedCount > 0) {
+        info.textContent = '対戦確定: ' + resolvedCount + ' 枠（自動更新 ' + window.KO_RESULTS_UPDATED + ' UTC）。クリックで予測へ。';
+      } else {
+        info.textContent = 'グループステージ終了後、確定した対戦国を自動で表示します（現在は組み合わせ枠）。';
+      }
+    }
   }
   function drawSchedule() {
     var box = $('scheduleBox');
