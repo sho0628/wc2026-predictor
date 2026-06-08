@@ -132,10 +132,14 @@
     var topScore = pr.topScores[0];
     var html = '';
     html += '<div class="card">';
-    html += '<div class="team-head">';
-    html += '<div class="t">' + flag(a.name) + a.name + '<span class="small">Elo ' + Math.round(a.eloEff) + (a.form ? ' / 調子' + a.form : '') + '</span></div>';
-    html += '<div class="small">予想スコア <b style="color:var(--txt);font-size:18px">' + topScore.x + ' - ' + topScore.y + '</b></div>';
-    html += '<div class="t" style="flex-direction:row-reverse">' + flag(b.name) + b.name + '<span class="small">Elo ' + Math.round(b.eloEff) + (b.form ? ' / 調子' + b.form : '') + '</span></div>';
+    html += '<div class="predhead">';
+    html += '<div class="side left"><div class="nm">' + flag(a.name) + '<span>' + a.name + '</span></div>' +
+      '<div class="meta">Elo ' + Math.round(a.eloEff) + (a.form ? ' ・ 調子' + a.form : '') + '</div></div>';
+    html += '<div class="scorebox"><div class="lbl">予想スコア</div>' +
+      '<div class="sc"><span class="h">' + topScore.x + '</span><span class="dash">-</span><span class="a">' + topScore.y + '</span></div>' +
+      '<div class="scp">' + pct(topScore.p) + '</div></div>';
+    html += '<div class="side right"><div class="nm"><span>' + b.name + '</span>' + flag(b.name) + '</div>' +
+      '<div class="meta">Elo ' + Math.round(b.eloEff) + (b.form ? ' ・ 調子' + b.form : '') + '</div></div>';
     html += '</div>';
 
     html += '<div class="bar1x2">';
