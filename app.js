@@ -719,7 +719,8 @@
     rows.forEach(function (t, i) {
       var grp = (D.groups || []).find(function (g) { return g.teams.indexOf(t.name) >= 0; });
       var info = (t.star ? t.star : '') + (t.inj ? ' ／ <span style="color:var(--amber)">' + t.inj + '</span>' : '') +
-        (t.injPenalty > 0 ? ' <span style="color:var(--red);font-weight:700">−' + t.injPenalty + '</span>' : '');
+        (t.injPenalty > 0 ? ' <span style="color:var(--red);font-weight:700">負傷−' + t.injPenalty + '</span>' : '') +
+        (t.adj ? ' <span style="color:' + (t.adj > 0 ? 'var(--green)' : 'var(--red)') + ';font-weight:700">市場' + (t.adj > 0 ? '+' : '') + t.adj + '</span>' : '');
       html += '<tr><td class="num">' + (i + 1) + '</td>';
       html += '<td>' + flag(t.name) + ' ' + t.name + '</td>';
       html += '<td class="num">' + (t.elo ? Math.round(t.elo) : '—') + '</td>';

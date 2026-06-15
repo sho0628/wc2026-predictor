@@ -192,6 +192,9 @@
     // 酷暑補正
     if (ctx.heatUnfamiliar) elo -= weights.heat != null ? weights.heat : 15;
 
+    // 市場・専門家コンセンサス補正（手動キャリブレーション。Elo/FIFAが捉えきれないズレを是正）
+    if (typeof team.adj === 'number') elo += team.adj;
+
     return elo;
   }
 
