@@ -4,7 +4,7 @@
  *  アプリは data.js の elo にこれを上書き適用（試合結果を自動反映）。
  * ========================================================================== */
 window.ELO_LIVE = {
- "Spain": 2157,
+ "Spain": 2129,
  "Argentina": 2115,
  "France": 2063,
  "England": 2024,
@@ -43,8 +43,8 @@ window.ELO_LIVE = {
  "DR Congo": 1652,
  "Bosnia and Herzegovina": 1616,
  "Iraq": 1607,
+ "Cape Verde": 1606,
  "Tunisia": 1585,
- "Cape Verde": 1578,
  "Saudi Arabia": 1576,
  "New Zealand": 1562,
  "Haiti": 1536,
@@ -53,4 +53,4 @@ window.ELO_LIVE = {
  "Qatar": 1447,
  "Curacao": 1427
 };
-window.ELO_LIVE_UPDATED = "2026-06-15 17:16";
+window.ELO_LIVE_UPDATED = "2026-06-15 20:54";
