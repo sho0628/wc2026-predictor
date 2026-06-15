@@ -12,7 +12,7 @@
     var vals = teamNames.map(function (n) { return D.teams[n].fifa; }).filter(function (x) { return typeof x === 'number'; });
     return vals.length ? vals.reduce(function (a, b) { return a + b; }, 0) / vals.length : 1580;
   })();
-  function baseWeights() { return { form: 40, inj: 1.0, fifa: 35, fifaMean: FIFA_MEAN, host: 70, altitude: 25, heat: 15 }; }
+  function baseWeights() { return { form: 40, inj: 1.0, fifa: 0, fifaMean: FIFA_MEAN, host: 70, altitude: 25, heat: 15 }; }
   function team(name) { return Object.assign({ name: name }, D.teams[name] || {}); }
   function codeOf(name) { return (D.teams[name] && D.teams[name].code) || ''; }
   function eloOf(name) { return (D.teams[name] && D.teams[name].elo) || 1500; }
@@ -103,7 +103,7 @@
     return {
       form: parseFloat($('formW').value),
       inj: injEl ? parseFloat(injEl.value) : 1.0,
-      fifa: fifaEl ? parseFloat(fifaEl.value) : 35,
+      fifa: fifaEl ? parseFloat(fifaEl.value) : 0,
       fifaMean: FIFA_MEAN,
       host: 70, altitude: 25, heat: 15
     };
