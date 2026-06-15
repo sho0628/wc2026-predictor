@@ -13,9 +13,10 @@
     return vals.length ? vals.reduce(function (a, b) { return a + b; }, 0) / vals.length : 1580;
   })();
   function baseWeights() { return { form: 40, inj: 1.0, fifa: 0, fifaMean: FIFA_MEAN, host: 70, altitude: 25, heat: 15 }; }
-  function team(name) { return Object.assign({ name: name }, D.teams[name] || {}); }
+  function liveElo(name) { return (window.ELO_LIVE && typeof window.ELO_LIVE[name] === 'number') ? window.ELO_LIVE[name] : null; }
+  function team(name) { var t = Object.assign({ name: name }, D.teams[name] || {}); var le = liveElo(name); if (le != null) t.elo = le; return t; }
   function codeOf(name) { return (D.teams[name] && D.teams[name].code) || ''; }
-  function eloOf(name) { return (D.teams[name] && D.teams[name].elo) || 1500; }
+  function eloOf(name) { var le = liveElo(name); return le != null ? le : ((D.teams[name] && D.teams[name].elo) || 1500); }
   function flag(name) {
     var c = codeOf(name);
     if (!c) return '';
@@ -739,6 +740,44 @@
     if (D.meta && D.meta.sources) $('sourcesBox').innerHTML = '<ul>' + D.meta.sources.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ul>';
   }
 
+  /* ---------- ライブ更新（最新Elo取り込み） ---------- */
+  function updateLiveStamp() {
+    var s = $('liveStamp');
+    if (s) s.textContent = window.ELO_LIVE_UPDATED ? 'Elo更新 ' + window.ELO_LIVE_UPDATED : '';
+  }
+  function refreshSelectLabels() {
+    [$('teamA'), $('teamB')].forEach(function (sel) {
+      if (!sel) return;
+      Array.prototype.forEach.call(sel.options, function (o) { o.textContent = o.value + '  (Elo ' + Math.round(eloOf(o.value)) + ')'; });
+    });
+  }
+  function refreshTotoCardProbs() {
+    if (!totoCard || !totoCard.length) return;
+    totoCard.forEach(function (e) { var n = predictCardMatch(e.home, e.away); if (n) e.probs = n.probs; });
+    renderToto();
+  }
+  function updateLive() {
+    var btn = $('refreshBtn'); var old = btn ? btn.textContent : '';
+    if (btn) { btn.textContent = '更新中…'; btn.disabled = true; }
+    var bust = '?cb=' + Date.now();
+    function get(u) { return fetch(u + bust).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; }); }
+    Promise.all([get('elo-live.js'), get('ko-results.js')]).then(function (res) {
+      try { if (res[0]) (0, eval)(res[0]); } catch (e) { }
+      try { if (res[1]) (0, eval)(res[1]); } catch (e) { }
+      // レーティング依存の表示をすべて再描画
+      try {
+        refreshSelectLabels();
+        if (lastPrediction) runPredict();
+        renderGroups();
+        renderRatings($('ratingSearch') ? $('ratingSearch').value : '');
+        renderKnockout();
+        refreshTotoCardProbs();
+      } catch (e) { }
+      updateLiveStamp();
+      if (btn) { btn.textContent = '✓ 更新済'; setTimeout(function () { btn.textContent = old || '🔄 更新'; btn.disabled = false; }, 1500); }
+    });
+  }
+
   /* ---------- 初期化 ---------- */
   function init() {
     if (!teamNames.length) { $('result').innerHTML = '<div class="card"><p class="note">チームデータ(data.js)が読み込まれていません。</p></div>'; return; }
@@ -782,6 +821,8 @@
     initGoal3();
     renderRatings('');
     renderMeta();
+    $('refreshBtn').addEventListener('click', updateLive);
+    updateLiveStamp();
     runPredict();
   }
 

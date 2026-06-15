@@ -46,6 +46,10 @@ header.top {
 .logo .ball { font-size: 22px; }
 .logo .pill { background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .top .sub { color: var(--muted); font-size: 12px; }
+.top-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.refresh-btn { background: var(--card2); color: var(--txt); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.refresh-btn:hover { border-color: var(--accent); }
+.refresh-btn:disabled { opacity: .7; cursor: default; }
 nav.tabs { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
 nav.tabs button {
   background: transparent; color: var(--muted); border: 1px solid transparent;

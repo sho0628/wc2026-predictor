@@ -1,0 +1,39 @@
+name: Update live Elo
+
+# eloratings.net の最新Elo（試合結果を反映）を定期取得し elo-live.js を自動更新。
+# アプリ内「更新」ボタンはこの elo-live.js を取得し直す。手動実行も可能。
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # 6時間ごと（UTC）
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-elo
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Fetch latest Elo
+        run: node scripts/update-elo.mjs
+      - name: Commit if changed
+        run: |
+          if [ -n "$(git status --porcelain elo-live.js)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add elo-live.js
+            git commit -m "Auto-update live Elo [skip ci]"
+            git push
+            echo "elo-live.js updated and pushed."
+          else
+            echo "No change in elo-live.js."
+          fi
