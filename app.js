@@ -7,6 +7,12 @@
   var E = window.Engine;
 
   var teamNames = Object.keys(D.teams).sort();
+  // FIFAポイントの平均（FIFAランク反映ブレンドの基準）
+  var FIFA_MEAN = (function () {
+    var vals = teamNames.map(function (n) { return D.teams[n].fifa; }).filter(function (x) { return typeof x === 'number'; });
+    return vals.length ? vals.reduce(function (a, b) { return a + b; }, 0) / vals.length : 1580;
+  })();
+  function baseWeights() { return { form: 40, inj: 1.0, fifa: 35, fifaMean: FIFA_MEAN, host: 70, altitude: 25, heat: 15 }; }
   function team(name) { return Object.assign({ name: name }, D.teams[name] || {}); }
   function codeOf(name) { return (D.teams[name] && D.teams[name].code) || ''; }
   function eloOf(name) { return (D.teams[name] && D.teams[name].elo) || 1500; }
@@ -93,8 +99,14 @@
     return bits.length ? '自動補正: ' + bits.join(' / ') : '';
   }
   function currentWeights() {
-    var injEl = $('injW');
-    return { form: parseFloat($('formW').value), inj: injEl ? parseFloat(injEl.value) : 1.0, host: 70, altitude: 25, heat: 15 };
+    var injEl = $('injW'), fifaEl = $('fifaW');
+    return {
+      form: parseFloat($('formW').value),
+      inj: injEl ? parseFloat(injEl.value) : 1.0,
+      fifa: fifaEl ? parseFloat(fifaEl.value) : 35,
+      fifaMean: FIFA_MEAN,
+      host: 70, altitude: 25, heat: 15
+    };
   }
 
   /* ---------- 予測実行 ---------- */
@@ -516,8 +528,8 @@
       if (fx.teamA === home) { ctxA = c.a; ctxB = c.b; } else { ctxA = c.b; ctxB = c.a; }
     }
     var a = team(home), b = team(away);
-    a.eloEff = E.buildEffElo(a, ctxA, { form: 40 });
-    b.eloEff = E.buildEffElo(b, ctxB, { form: 40 });
+    a.eloEff = E.buildEffElo(a, ctxA, baseWeights());
+    b.eloEff = E.buildEffElo(b, ctxB, baseWeights());
     var pr = E.predict(a, b, { baseTotal: 2.6 });
     var j = fx ? toJST(fx) : null;
     var entry = { home: home, away: away, probs: [pr.pHome, pr.pDraw, pr.pAway], jmd: j ? j.md : '', jwd: j ? j.wd : '', jtime: j ? j.time : '', group: fx ? fx.group : '', sortKey: fx ? kickoffInstant(fx) : 0 };
@@ -682,7 +694,7 @@
     var fx = findFixture(home, away), ctxA = {}, ctxB = {};
     if (fx) { var c = autoContextFromMatch(fx); if (fx.teamA === home) { ctxA = c.a; ctxB = c.b; } else { ctxA = c.b; ctxB = c.a; } }
     var a = team(home), b = team(away);
-    a.eloEff = E.buildEffElo(a, ctxA, { form: 40 }); b.eloEff = E.buildEffElo(b, ctxB, { form: 40 });
+    a.eloEff = E.buildEffElo(a, ctxA, baseWeights()); b.eloEff = E.buildEffElo(b, ctxB, baseWeights());
     var gb = E.goalBuckets(E.predict(a, b, { baseTotal: 2.6 }).matrix);
     return { gb: gb, jst: fx ? toJST(fx) : null };
   }
@@ -743,7 +755,8 @@
     $('venuePreset').addEventListener('change', runPredict);
     $('formW').addEventListener('input', function () { $('formWLbl').textContent = $('formW').value; });
     $('injW').addEventListener('input', function () { $('injWLbl').textContent = parseFloat($('injW').value).toFixed(1); });
-    ['formW', 'injW', 'totalW'].forEach(function (id) { $(id).addEventListener('change', runPredict); });
+    $('fifaW').addEventListener('input', function () { $('fifaWLbl').textContent = $('fifaW').value; });
+    ['formW', 'injW', 'fifaW', 'totalW'].forEach(function (id) { $(id).addEventListener('change', runPredict); });
     $('totalW').addEventListener('input', function () { $('totalLbl').textContent = parseFloat($('totalW').value).toFixed(1); });
     $('fillFairBtn').addEventListener('click', function () {
       if (!lastWinnerOpts) return;
