@@ -136,7 +136,7 @@ window.WC_DATA = {
 
   // 2026-06-15時点（大会進行中・13試合消化）。elo/form/injは実際の結果を反映、adjは市場(ブックメーカー+Opta)再較正値。
   teams: {
-    'Spain':                  { code: 'es', elo: 2157, fifa: 1876.4,  fifaRank: 2,  form: 77, injPenalty: 16, star: 'Yamal, Pedri, Rodri', inj: 'Yamal復帰見込/Fermín離脱・Merino,N.Williams微妙' },
+    'Spain':                  { code: 'es', elo: 2157, fifa: 1876.4,  fifaRank: 2,  form: 73, injPenalty: 16, star: 'Yamal, Pedri, Rodri', inj: 'Yamal復帰見込/Fermín離脱・△0-0カーボベルデ(完封され取りこぼし)' },
     'Argentina':              { code: 'ar', elo: 2115, fifa: 1874.81, fifaRank: 3,  form: 85, injPenalty: 14, star: 'Messi, L.Martínez', inj: 'Messi復帰見込/Balerdi・Foyth離脱・Romero微妙' },
     'France':                 { code: 'fr', elo: 2063, fifa: 1877.32, fifaRank: 1,  form: 75, injPenalty: 11, star: 'Mbappé, Dembélé', inj: 'Ekitike離脱/Saliba・Dembélé復帰(Mbappé可)' },
     'England':                { code: 'gb-eng', elo: 2024, fifa: 1825.97, fifaRank: 4, form: 78, injPenalty: 10, star: 'Kane, Bellingham, Saka', inj: 'Livramento離脱(主力は健在)' },
@@ -175,7 +175,7 @@ window.WC_DATA = {
     'Tunisia':                { code: 'tn', elo: 1585, fifa: 1483,    fifaRank: 44, form: 46, injPenalty: 0,  star: 'Msakni', inj: '●1-5スウェーデン' },
     'Iraq':                   { code: 'iq', elo: 1607, fifa: 1447,    fifaRank: 57, form: 56, injPenalty: 0,  star: 'Aymen Hussein', inj: '大きな負傷なし' },
     'Bosnia and Herzegovina': { code: 'ba', elo: 1616, fifa: 1386,    fifaRank: 65, form: 56, injPenalty: 2,  star: 'Džeko, Tabaković', inj: '控GKのみ離脱(△1-1カナダ)' },
-    'Cape Verde':             { code: 'cv', elo: 1578, fifa: 1366,    fifaRank: 69, form: 60, injPenalty: 0,  star: 'Ryan Mendes', inj: '大きな負傷なし' },
+    'Cape Verde':             { code: 'cv', elo: 1578, fifa: 1366,    fifaRank: 69, form: 70, injPenalty: 0,  adj: 15, star: 'Ryan Mendes', inj: '△0-0スペイン(無失点・堅守, デビューで大金星)' },
     'Saudi Arabia':           { code: 'sa', elo: 1576, fifa: 1421,    fifaRank: 61, form: 52, injPenalty: 0,  star: 'Al-Dawsari', inj: '大きな負傷なし' },
     'New Zealand':            { code: 'nz', elo: 1562, fifa: 1282,    fifaRank: 85, form: 48, injPenalty: 0,  star: 'C.Wood', inj: '大きな負傷なし' },
     'Haiti':                  { code: 'ht', elo: 1536, fifa: 1292,    fifaRank: 83, form: 53, injPenalty: 0,  star: 'Pierrot', inj: '●0-1スコットランド' },
