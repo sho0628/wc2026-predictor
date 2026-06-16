@@ -31,8 +31,8 @@ window.ELO_LIVE = {
  "Paraguay": 1780,
  "United States": 1780,
  "Algeria": 1772,
- "Iran": 1772,
  "Canada": 1767,
+ "Iran": 1756,
  "Sweden": 1755,
  "Ivory Coast": 1743,
  "Panama": 1730,
@@ -46,11 +46,11 @@ window.ELO_LIVE = {
  "Cape Verde": 1606,
  "Saudi Arabia": 1598,
  "Tunisia": 1585,
- "New Zealand": 1562,
+ "New Zealand": 1578,
  "Haiti": 1536,
  "South Africa": 1511,
  "Ghana": 1510,
  "Qatar": 1447,
  "Curacao": 1427
 };
-window.ELO_LIVE_UPDATED = "2026-06-16 03:59";
+window.ELO_LIVE_UPDATED = "2026-06-16 20:49";
