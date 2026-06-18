@@ -736,7 +736,9 @@
   /* ---------- メタ・出典 ---------- */
   function renderMeta() {
     if (D.meta && D.meta.title) $('metaSub').textContent = D.meta.title;
-    $('foot').textContent = 'データ最終更新: ' + (D.meta && D.meta.updated || '—') + '　|　予測は確率です。賭けは自己責任で。';
+    var base = (D.meta && D.meta.updated) || '—';
+    var live = window.ELO_LIVE_UPDATED ? '　|　ライブElo: ' + window.ELO_LIVE_UPDATED : '';
+    $('foot').textContent = 'データ最終更新: ' + base + live + '　|　予測は確率です。賭けは自己責任で。';
     if (D.meta && D.meta.sources) $('sourcesBox').innerHTML = '<ul>' + D.meta.sources.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ul>';
   }
 
@@ -774,6 +776,7 @@
         refreshTotoCardProbs();
       } catch (e) { }
       updateLiveStamp();
+      renderMeta();
       if (btn) { btn.textContent = '✓ 更新済'; setTimeout(function () { btn.textContent = old || '🔄 更新'; btn.disabled = false; }, 1500); }
     });
   }
