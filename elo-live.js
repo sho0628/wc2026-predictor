@@ -8,7 +8,7 @@ window.ELO_LIVE = {
  "Argentina": 2128,
  "France": 2084,
  "England": 2055,
- "Colombia": 1982,
+ "Colombia": 1998,
  "Brazil": 1978,
  "Portugal": 1967,
  "Netherlands": 1944,
@@ -35,10 +35,10 @@ window.ELO_LIVE = {
  "Iran": 1756,
  "Sweden": 1755,
  "Ivory Coast": 1743,
- "Panama": 1730,
- "Uzbekistan": 1714,
  "Czech Republic": 1712,
  "Egypt": 1711,
+ "Uzbekistan": 1698,
+ "Panama": 1683,
  "DR Congo": 1674,
  "Jordan": 1653,
  "Bosnia and Herzegovina": 1616,
@@ -47,10 +47,10 @@ window.ELO_LIVE = {
  "Iraq": 1592,
  "Tunisia": 1585,
  "New Zealand": 1578,
+ "Ghana": 1557,
  "Haiti": 1536,
  "South Africa": 1511,
- "Ghana": 1510,
  "Qatar": 1447,
  "Curacao": 1427
 };
-window.ELO_LIVE_UPDATED = "2026-06-18 03:51";
+window.ELO_LIVE_UPDATED = "2026-06-18 10:19";
