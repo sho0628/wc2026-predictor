@@ -8,4 +8,4 @@ window.KO_RESULTS = {
     "teamA": "Mexico"
   }
 };
-window.KO_RESULTS_UPDATED = "2026-06-19 10:24";
+window.KO_RESULTS_UPDATED = "2026-06-19 15:12";
