@@ -3,5 +3,9 @@
  *  GitHub Action (.github/workflows/update-knockout.yml) が自動更新。
  *  形式: window.KO_RESULTS = { "73": { teamA, teamB }, ... }
  * ========================================================================== */
-window.KO_RESULTS = {};
-window.KO_RESULTS_UPDATED = "";
+window.KO_RESULTS = {
+  "79": {
+    "teamA": "Mexico"
+  }
+};
+window.KO_RESULTS_UPDATED = "2026-06-19 04:11";
