@@ -21,16 +21,16 @@ window.ELO_LIVE = {
  "Croatia": 1881,
  "Belgium": 1879,
  "Uruguay": 1870,
+ "Morocco": 1866,
  "Austria": 1857,
  "Turkey": 1849,
- "Morocco": 1840,
- "Australia": 1839,
  "Senegal": 1839,
- "Scotland": 1794,
+ "United States": 1820,
+ "Australia": 1799,
  "Paraguay": 1780,
- "United States": 1780,
  "Canada": 1777,
  "South Korea": 1771,
+ "Scotland": 1768,
  "Algeria": 1759,
  "Iran": 1756,
  "Sweden": 1755,
@@ -53,4 +53,4 @@ window.ELO_LIVE = {
  "Qatar": 1437,
  "Curacao": 1427
 };
-window.ELO_LIVE_UPDATED = "2026-06-19 15:16";
+window.ELO_LIVE_UPDATED = "2026-06-20 03:34";
