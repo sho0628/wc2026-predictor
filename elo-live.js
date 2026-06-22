@@ -33,9 +33,9 @@ window.ELO_LIVE = {
  "Scotland": 1768,
  "Iran": 1766,
  "Algeria": 1759,
+ "Egypt": 1740,
  "Ivory Coast": 1728,
  "Sweden": 1727,
- "Egypt": 1711,
  "Uzbekistan": 1698,
  "Czech Republic": 1696,
  "Panama": 1683,
@@ -45,12 +45,12 @@ window.ELO_LIVE = {
  "Bosnia and Herzegovina": 1596,
  "Saudi Arabia": 1593,
  "Iraq": 1592,
- "New Zealand": 1578,
  "Tunisia": 1570,
  "Ghana": 1557,
+ "New Zealand": 1549,
  "Haiti": 1528,
  "South Africa": 1527,
  "Curacao": 1453,
  "Qatar": 1437
 };
-window.ELO_LIVE_UPDATED = "2026-06-22 04:06";
+window.ELO_LIVE_UPDATED = "2026-06-22 16:58";
