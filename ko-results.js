@@ -17,4 +17,4 @@ window.KO_RESULTS = {
     "teamA": "Argentina"
   }
 };
-window.KO_RESULTS_UPDATED = "2026-06-23 20:02";
+window.KO_RESULTS_UPDATED = "2026-06-23 22:11";
