@@ -12,6 +12,9 @@ window.KO_RESULTS = {
   },
   "81": {
     "teamA": "United States"
+  },
+  "86": {
+    "teamA": "Argentina"
   }
 };
-window.KO_RESULTS_UPDATED = "2026-06-23 03:27";
+window.KO_RESULTS_UPDATED = "2026-06-23 09:36";
