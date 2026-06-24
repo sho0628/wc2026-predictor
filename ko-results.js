@@ -4,6 +4,9 @@
  *  形式: window.KO_RESULTS = { "73": { teamA, teamB }, ... }
  * ========================================================================== */
 window.KO_RESULTS = {
+  "73": {
+    "teamA": "Canada"
+  },
   "74": {
     "teamA": "Germany"
   },
@@ -13,8 +16,11 @@ window.KO_RESULTS = {
   "81": {
     "teamA": "United States"
   },
+  "85": {
+    "teamA": "Switzerland"
+  },
   "86": {
     "teamA": "Argentina"
   }
 };
-window.KO_RESULTS_UPDATED = "2026-06-24 19:44";
+window.KO_RESULTS_UPDATED = "2026-06-24 22:15";
