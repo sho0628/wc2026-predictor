@@ -12,10 +12,12 @@ window.KO_RESULTS = {
     "teamA": "Germany"
   },
   "75": {
-    "teamA": "Morocco"
+    "teamA": "Netherlands",
+    "teamB": "Morocco"
   },
   "76": {
-    "teamA": "Brazil"
+    "teamA": "Brazil",
+    "teamB": "Japan"
   },
   "78": {
     "teamA": "Ivory Coast"
@@ -24,7 +26,8 @@ window.KO_RESULTS = {
     "teamA": "Mexico"
   },
   "81": {
-    "teamA": "United States"
+    "teamA": "United States",
+    "teamB": "Bosnia and Herzegovina"
   },
   "85": {
     "teamA": "Switzerland"
@@ -33,4 +36,4 @@ window.KO_RESULTS = {
     "teamA": "Argentina"
   }
 };
-window.KO_RESULTS_UPDATED = "2026-06-25 22:20";
+window.KO_RESULTS_UPDATED = "2026-06-26 03:34";
