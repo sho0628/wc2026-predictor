@@ -21,13 +21,13 @@ window.ELO_LIVE = {
  "Croatia": 1896,
  "Morocco": 1877,
  "Belgium": 1869,
+ "Turkey": 1852,
  "Uruguay": 1851,
  "Austria": 1841,
- "United States": 1820,
  "Senegal": 1817,
- "Paraguay": 1816,
- "Turkey": 1813,
- "Australia": 1799,
+ "Paraguay": 1815,
+ "Australia": 1800,
+ "United States": 1781,
  "Algeria": 1780,
  "Iran": 1766,
  "Canada": 1748,
@@ -53,4 +53,4 @@ window.ELO_LIVE = {
  "Curacao": 1438,
  "Qatar": 1411
 };
-window.ELO_LIVE_UPDATED = "2026-06-26 09:23";
+window.ELO_LIVE_UPDATED = "2026-06-26 14:22";
