@@ -9,7 +9,8 @@ window.KO_RESULTS = {
     "teamB": "Canada"
   },
   "74": {
-    "teamA": "Germany"
+    "teamA": "Germany",
+    "teamB": "Paraguay"
   },
   "75": {
     "teamA": "Netherlands",
@@ -20,7 +21,8 @@ window.KO_RESULTS = {
     "teamB": "Japan"
   },
   "77": {
-    "teamA": "France"
+    "teamA": "France",
+    "teamB": "Sweden"
   },
   "78": {
     "teamA": "Ivory Coast",
@@ -33,14 +35,18 @@ window.KO_RESULTS = {
     "teamA": "United States",
     "teamB": "Bosnia and Herzegovina"
   },
+  "84": {
+    "teamA": "Spain"
+  },
   "85": {
     "teamA": "Switzerland"
   },
   "86": {
-    "teamA": "Argentina"
+    "teamA": "Argentina",
+    "teamB": "Cape Verde"
   },
   "88": {
     "teamA": "Australia"
   }
 };
-window.KO_RESULTS_UPDATED = "2026-06-26 22:12";
+window.KO_RESULTS_UPDATED = "2026-06-27 02:56";
