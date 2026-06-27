@@ -35,6 +35,9 @@ window.KO_RESULTS = {
     "teamA": "United States",
     "teamB": "Bosnia and Herzegovina"
   },
+  "82": {
+    "teamA": "Belgium"
+  },
   "84": {
     "teamA": "Spain"
   },
@@ -46,7 +49,8 @@ window.KO_RESULTS = {
     "teamB": "Cape Verde"
   },
   "88": {
-    "teamA": "Australia"
+    "teamA": "Australia",
+    "teamB": "Egypt"
   }
 };
-window.KO_RESULTS_UPDATED = "2026-06-27 02:56";
+window.KO_RESULTS_UPDATED = "2026-06-27 06:31";
