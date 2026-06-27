@@ -4,15 +4,15 @@
  *  アプリは data.js の elo にこれを上書き適用（試合結果を自動反映）。
  * ========================================================================== */
 window.ELO_LIVE = {
+ "Spain": 2144,
  "Argentina": 2144,
- "Spain": 2134,
- "France": 2090,
+ "France": 2123,
  "England": 2028,
  "Brazil": 2009,
  "Colombia": 2006,
  "Portugal": 1988,
  "Netherlands": 1980,
- "Norway": 1951,
+ "Norway": 1918,
  "Germany": 1916,
  "Switzerland": 1914,
  "Mexico": 1912,
@@ -22,9 +22,9 @@ window.ELO_LIVE = {
  "Morocco": 1877,
  "Belgium": 1869,
  "Turkey": 1852,
- "Uruguay": 1851,
+ "Senegal": 1842,
+ "Uruguay": 1841,
  "Austria": 1841,
- "Senegal": 1817,
  "Paraguay": 1815,
  "Australia": 1800,
  "United States": 1781,
@@ -41,16 +41,16 @@ window.ELO_LIVE = {
  "Panama": 1668,
  "DR Congo": 1666,
  "Jordan": 1632,
- "Cape Verde": 1625,
  "Bosnia and Herzegovina": 1622,
- "Saudi Arabia": 1593,
- "Iraq": 1586,
+ "Cape Verde": 1622,
+ "Saudi Arabia": 1596,
  "Ghana": 1584,
  "South Africa": 1575,
  "Tunisia": 1562,
+ "Iraq": 1561,
  "New Zealand": 1549,
  "Haiti": 1517,
  "Curacao": 1438,
  "Qatar": 1411
 };
-window.ELO_LIVE_UPDATED = "2026-06-26 19:45";
+window.ELO_LIVE_UPDATED = "2026-06-27 02:57";
