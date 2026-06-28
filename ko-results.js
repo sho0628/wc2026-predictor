@@ -69,4 +69,4 @@ window.KO_RESULTS = {
     "teamB": "Egypt"
   }
 };
-window.KO_RESULTS_UPDATED = "2026-06-28 08:49";
+window.KO_RESULTS_UPDATED = "2026-06-28 11:06";
