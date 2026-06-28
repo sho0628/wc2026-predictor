@@ -4,8 +4,8 @@
  *  アプリは data.js の elo にこれを上書き適用（試合結果を自動反映）。
  * ========================================================================== */
 window.ELO_LIVE = {
+ "Argentina": 2148,
  "Spain": 2144,
- "Argentina": 2144,
  "France": 2123,
  "England": 2038,
  "Brazil": 2009,
@@ -24,11 +24,11 @@ window.ELO_LIVE = {
  "Turkey": 1852,
  "Senegal": 1842,
  "Uruguay": 1841,
- "Austria": 1841,
+ "Austria": 1836,
  "Paraguay": 1815,
  "Australia": 1800,
+ "Algeria": 1785,
  "United States": 1781,
- "Algeria": 1780,
  "Iran": 1764,
  "Canada": 1748,
  "Scotland": 1745,
@@ -39,8 +39,8 @@ window.ELO_LIVE = {
  "DR Congo": 1712,
  "Czech Republic": 1680,
  "Panama": 1658,
- "Jordan": 1632,
  "Uzbekistan": 1631,
+ "Jordan": 1628,
  "Bosnia and Herzegovina": 1622,
  "Cape Verde": 1622,
  "Saudi Arabia": 1596,
@@ -53,4 +53,4 @@ window.ELO_LIVE = {
  "Curacao": 1438,
  "Qatar": 1411
 };
-window.ELO_LIVE_UPDATED = "2026-06-28 03:40";
+window.ELO_LIVE_UPDATED = "2026-06-28 13:43";
