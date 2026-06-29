@@ -53,4 +53,4 @@ window.ELO_LIVE = {
  "Curacao": 1438,
  "Qatar": 1411
 };
-window.ELO_LIVE_UPDATED = "2026-06-29 03:46";
+window.ELO_LIVE_UPDATED = "2026-06-29 10:56";
