@@ -72,4 +72,4 @@ window.KO_RESULTS = {
     "teamA": "Canada"
   }
 };
-window.KO_RESULTS_UPDATED = "2026-06-28 22:00";
+window.KO_RESULTS_UPDATED = "2026-06-29 03:45";
