@@ -71,4 +71,4 @@ window.KO_RESULTS = {
     "teamA": "Brazil"
   }
 };
-window.KO_RESULTS_UPDATED = "2026-06-29 19:55";
+window.KO_RESULTS_UPDATED = "2026-06-29 22:07";
