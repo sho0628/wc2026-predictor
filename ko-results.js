@@ -63,6 +63,9 @@ window.KO_RESULTS = {
   "91": {
     "teamA": "Brazil",
     "teamB": "Norway"
+  },
+  "92": {
+    "teamA": "Mexico"
   }
 };
-window.KO_RESULTS_UPDATED = "2026-07-01 03:41";
+window.KO_RESULTS_UPDATED = "2026-07-01 09:42";
